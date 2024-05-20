@@ -1,11 +1,6 @@
 import config
-import pickle
 import numpy as np
 from tqdm import tqdm
-from keras_bert import get_custom_objects
-from keras.models import load_model
-from keras_bert import load_vocabulary, Tokenizer
-from sklearn.metrics import hamming_loss, classification_report
 
 def load_data(txt_file_path):
     text_list = []
@@ -17,7 +12,7 @@ def load_data(txt_file_path):
             text_list.append(line[1])
     return text_list, label_list
 
-# 对文本编码
+# encode text
 def encoding_text(content_list,tokenizer):
     token_ids = []
     segment_ids = []

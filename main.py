@@ -1,5 +1,5 @@
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 from utils import load_data,encoding_text
 import config
 import random
@@ -48,7 +48,7 @@ val_y = np.array(mlb.transform(val_label_y))
 test_y = np.array(mlb.transform(test_label_y))
 
 
-## train
+# train
 model = build_bert_textcnn_model(config.bert_config_path,
                                  config.bert_checkpoint_path, len(mlb.classes_))
 model.summary()
@@ -57,7 +57,7 @@ history = model.fit(train_x, train_y, validation_data=(val_x, val_y),
                     batch_size=config.batch_size, epochs=config.epochs,
                     callbacks=[early_stopping])
 # model save
-model.save("./bert_textcnn.h5")
+model.save("./model/bert_textcnn.h5")
 
 
 # plot loss
@@ -77,7 +77,7 @@ plt.savefig("./bert-textcnn-loss-acc.png")
 
 
 # load model
-model = load_model('./bert_textcnn.h5', custom_objects=get_custom_objects())
+model = load_model('./model/bert_textcnn.h5', custom_objects=get_custom_objects())
 mlb = pickle.load(open('./Datasets/mlb.pkl', 'rb'))
 
 # evaluate model

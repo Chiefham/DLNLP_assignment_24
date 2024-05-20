@@ -1,10 +1,5 @@
 import config
-import pickle
-import numpy as np
 from tqdm import tqdm
-from keras_bert import get_custom_objects
-from keras.models import load_model
-from keras_bert import load_vocabulary, Tokenizer
 from sklearn.metrics import hamming_loss, classification_report
 from utils import load_data,predict_single_text
 
@@ -20,7 +15,7 @@ def evaluate(mlb,model,tokenizer):
         pred_y_list.append(pred_y)
         pred_labels.append(label)
 
-    # 计算accuracy，一条数据的所有标签全部预测正确则1，否则为0。
+    # cal acc
     test_len = len(test_y)
     correct_count = 0
     for i in range(test_len):
